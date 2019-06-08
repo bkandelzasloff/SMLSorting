@@ -1,0 +1,24 @@
+  fun smallest(xs : int list) : int =
+    case xs of
+         [x] => x
+    |y :: ys => if y >= smallest(ys) then smallest(ys) else y
+
+  fun everythingBut(x : int, xs : int list) : int list =
+    case xs of
+         [] => []
+    |y :: ys =>
+        if x = y then ys
+        else
+          y :: everythingBut(x, ys)
+
+  fun selectSort(xs : int list) : int list =
+    case xs of
+         [] => []
+    |y :: ys =>
+        let
+          val z = smallest(xs)
+          val zs = everythingBut(z, xs)
+          val ws = selectSort(zs)
+        in
+          z :: ws
+        end
