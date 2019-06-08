@@ -1,0 +1,17 @@
+  fun f (xs : int list, x : int) : int list =
+    case xs of
+         nil => x :: xs
+    |y :: ys => if x <= y
+                then x :: xs
+                else
+                  y :: f(ys, x)
+ 
+  fun insertSort(xs : int list) : int list =
+    case xs of
+         [] => []
+    |y :: ys =>
+        let
+          val z = insertSort(ys)
+        in
+          f(z, y)
+        end
