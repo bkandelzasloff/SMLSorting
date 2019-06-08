@@ -1,0 +1,23 @@
+  fun merge(xs : int list, ys : int list) : int list = 
+    case (xs, ys) of
+         ([],[]) => []
+    | (x' :: x's, []) => x' :: x's
+    | ([], y' :: y's) => y' :: y's
+    | (x' :: x's, y' :: y's) => if x' < y' then
+                                  x' :: merge(x's, ys)
+                                else
+                                  y' :: merge(xs, y's)
+
+  fun mergeSort(xs : int list) : int list =
+    case xs of
+         [] => []
+    | [x] => [x]
+    | y :: ys =>
+        let
+          val k = length(xs) div 2
+          val r0 = mergeSort(List.take(xs, k))
+          val r1 = mergeSort(List.drop(xs, k))
+        in
+          merge(r0, r1)
+        end
+   
