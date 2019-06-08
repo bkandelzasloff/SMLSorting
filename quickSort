@@ -1,0 +1,23 @@
+  fun partition(xs : int list, x : int) : int list * int list =
+    case xs of
+         [] => ([], [])
+    |y :: ys =>
+        let
+          val(w, z) = partition(ys, x)
+        in
+          if y <= x
+          then
+            (y :: w, z)
+          else
+            (w, y :: z)
+        end
+
+  fun quickSort(xs : int list) : int list =
+    case xs of
+         [] => []
+    |y :: ys =>
+        let
+          val (x', y') = partition(ys, y)
+        in
+          quickSort(x')@[y]@quickSort(y')
+        end
